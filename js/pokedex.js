@@ -1,27 +1,23 @@
 const listaPokemons = document.querySelector(".listaPokemons");
 const botaoCarregarMais = document.querySelector("#carregarMais");
 const main = document.querySelector(".main");
+
 let setaVoltar = null;
 let detalhesPokemon = null;
 let habilidades = "";
 
-let offset = 0
+let offset = 0;
 let limit = 12;
-const limiteMax = 151;
+const limiteMax = 150;
 
 botaoCarregarMais.addEventListener("click", () => {
 
+    offset += limit;
+
     if(offset === 0){
-        
-        offset += limit;
+    
         limit = 8;
     
-    }
-
-    else{
-
-        offset += limit;
-
     }
 
     //Limitar à primeira geração de pokemons(até 150)
@@ -70,13 +66,13 @@ async function montarListaPokemons(offset, limit){
     const pokemonsNaLista = await pokeAPI.buscarPokemons(offset, limit); //Lista com todos os pokemons buscados
 
     //Separação dos pokemons buscados que estão dentro da lista e adição deles ao html
-    pokemonsNaLista.forEach(async (pokemons) => {
+    for(let i = 0; i < pokemonsNaLista.length; i++){
         
-        const pokemon = await pokeAPI.buscarPokemon(pokemons.url); //Pokemon retorna com seus detalhes (modelo próprio)
-        
+        const pokemon = await pokeAPI.buscarPokemon(pokemonsNaLista[i].url); //Pokemon retorna com seus detalhes (modelo próprio)
+
         listaPokemons.innerHTML += comandoHTMLCriador(pokemon); //Pokemon add ao html
-    
-    });
+        
+    };
     
 };
 
