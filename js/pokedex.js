@@ -13,12 +13,16 @@ botaoCarregarMais.addEventListener("click", () => {
 
     if(offset === 0){
         
-        offset = limit;
+        offset += limit;
         limit = 8;
     
-    };
-        
-    offset += limit;
+    }
+
+    else{
+
+        offset += limit;
+
+    }
 
     //Limitar à primeira geração de pokemons(até 150)
     const ultimoPokemonDaVez = offset + limit;
