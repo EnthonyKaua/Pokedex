@@ -9,6 +9,7 @@
 body{
 
     background-color: #f1f1f1;
+    overflow-x: hidden;
 
 }
 
@@ -424,7 +425,8 @@ button:active{
     .content{
 
         max-width: 800px;
-        height: 100vh;
+        height: auto;
+        max-height: 100vh;
         margin: 1rem auto;
         border-radius: 1rem;
 
