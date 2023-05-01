@@ -33,6 +33,7 @@ main{
     overflow-x: hidden;
     scroll-margin: 0.5rem;
     scroll-behavior: smooth;
+    animation: esmaecer 1250ms ease-in-out;
     
 }
 
@@ -145,6 +146,7 @@ button:active{
     color: #ffffff;
     border-radius: 1rem;
     box-shadow: 3px 4px 7px rgba(0, 0, 0, 0.836);
+    animation: puxar 750ms ease-in, esmaecer 800ms ease-in-out;
 
 }
 
@@ -385,6 +387,39 @@ button:active{
     border-radius: 10px;
     background: rgba(48, 48, 48, 0.13); 
 
+}
+
+
+@keyframes puxar{
+
+    from{
+
+        transform: translateX(25%);
+
+    }
+
+    to{
+
+        transform: translateX(0);
+
+    }
+    
+}
+
+@keyframes esmaecer{
+
+    from{
+
+        opacity: 0.1;
+
+    }
+
+    to{
+
+        opacity: 1;
+
+    }
+    
 }
 
 
