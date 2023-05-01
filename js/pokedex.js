@@ -1,6 +1,7 @@
 const listaPokemons = document.querySelector(".listaPokemons");
 const botaoCarregarMais = document.querySelector("#carregarMais");
 const main = document.querySelector(".main");
+let detalhesPokemonDiv = null;
 
 let setaVoltar = null;
 let detalhesPokemon = null;
@@ -18,7 +19,7 @@ botaoCarregarMais.addEventListener("click", () => {
     
         limit = 8;
     
-    }
+    };
 
     //Limitar à primeira geração de pokemons(até 150)
     const ultimoPokemonDaVez = offset + limit;
@@ -76,9 +77,15 @@ async function montarListaPokemons(offset, limit){
     
 };
 
-async function puxarDetalhesPokemon(nomePokemon){  
+async function puxarDetalhesPokemon(nomePokemon){
 
-    function comandoDetalhesHTML(pokemon){ return `
+    if(detalhesPokemonDiv!=null){
+
+        detalhesPokemonDiv.parentNode.removeChild(detalhesPokemonDiv);
+
+    };
+
+    function comandoDetalhesHTML(pokemon){return `
     
     <section class="cardDetalhesPokemon ${pokemon.tipoPrincipal}">
 
@@ -129,7 +136,7 @@ async function puxarDetalhesPokemon(nomePokemon){
 
     </section>
     
-    `}
+    `};
 
     const pokemonComDetalhes = await pokeAPI.buscarDetalhesPokemon(nomePokemon);
 
@@ -138,9 +145,15 @@ async function puxarDetalhesPokemon(nomePokemon){
         detalhesPokemon.parentNode.removeChild(detalhesPokemon);
         detalhesPokemon = null;
 
-    }
+    };
     
-    main.innerHTML += comandoDetalhesHTML(pokemonComDetalhes);
+    //Cria um novo elemento HTML para os detalhes do Pokémon e add a class
+    detalhesPokemonDiv = document.createElement("div");
+    detalhesPokemonDiv.classList.add("detalhesPokemonDiv");
+
+    detalhesPokemonDiv.innerHTML = comandoDetalhesHTML(pokemonComDetalhes); //Adiciona o pokemon com detalhe dentro da div "detalhesPokemonDiv"
+    main.appendChild(detalhesPokemonDiv); //Adiciona a div "detalhesPokemonDiv" à página dentro da variável "main"
+
     detalhesPokemon = document.querySelector(".cardDetalhesPokemon");
     setaVoltar = document.querySelector(".setaVoltar");
 
@@ -151,7 +164,7 @@ async function puxarDetalhesPokemon(nomePokemon){
             detalhesPokemon.parentNode.removeChild(detalhesPokemon);
             detalhesPokemon = null;
     
-        }
+        };
     
     });
 
