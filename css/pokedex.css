@@ -9,7 +9,7 @@
 body{
 
     background-color: #f1f1f1;
-    overflow-x: hidden;
+    overflow: hidden;
 
 }
 
@@ -425,7 +425,7 @@ button:active{
     .content{
 
         max-width: 800px;
-        height: auto;
+        height: 95vh;
         max-height: 100vh;
         margin: 1rem auto;
         border-radius: 1rem;
@@ -450,7 +450,7 @@ button:active{
         bottom: 70px;
         max-width: 400px;
         height: auto;
-        margin: 1rem auto;
+        margin: 1rem 3rem;
         border-radius: 1rem;
 
     }
