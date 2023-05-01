@@ -3,8 +3,6 @@ const botaoCarregarMais = document.querySelector("#carregarMais");
 const main = document.querySelector(".main");
 let detalhesPokemonDiv = null;
 
-let setaVoltar = null;
-let detalhesPokemon = null;
 let habilidades = "";
 
 let offset = 0;
@@ -139,34 +137,33 @@ async function puxarDetalhesPokemon(nomePokemon){
     `};
 
     const pokemonComDetalhes = await pokeAPI.buscarDetalhesPokemon(nomePokemon);
-
-    if(detalhesPokemon!=null){
-
-        detalhesPokemon.parentNode.removeChild(detalhesPokemon);
-        detalhesPokemon = null;
-
-    };
     
     //Cria um novo elemento HTML para os detalhes do Pokémon e add a class
     detalhesPokemonDiv = document.createElement("div");
     detalhesPokemonDiv.classList.add("detalhesPokemonDiv");
 
     detalhesPokemonDiv.innerHTML = comandoDetalhesHTML(pokemonComDetalhes); //Adiciona o pokemon com detalhe dentro da div "detalhesPokemonDiv"
-    main.appendChild(detalhesPokemonDiv); //Adiciona a div "detalhesPokemonDiv" à página dentro da variável "main"
-
-    detalhesPokemon = document.querySelector(".cardDetalhesPokemon");
-    setaVoltar = document.querySelector(".setaVoltar");
-
-    setaVoltar.addEventListener("click", () => {
-
-        if(detalhesPokemon!=null){
     
-            detalhesPokemon.parentNode.removeChild(detalhesPokemon);
-            detalhesPokemon = null;
+    //Tempo entre a exclusão e a aprição da div
+    setTimeout(() =>{
+
+        main.appendChild(detalhesPokemonDiv); //Adiciona a div "detalhesPokemonDiv" à página dentro da variável "main"
+
+    }, 250);
+
+    //Tempo para pegar o elemento seta e add o evento
+    setTimeout(() =>{
+
+        const setaVoltar = document.querySelector(".setaVoltar");
+
+        setaVoltar.addEventListener("click", () => {
+
+            detalhesPokemonDiv.parentNode.removeChild(detalhesPokemonDiv);
+            detalhesPokemonDiv = null;
     
-        };
-    
-    });
+        });
+
+    }, 500);
 
 };
 
