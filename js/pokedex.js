@@ -1,7 +1,7 @@
 const listaPokemons = document.querySelector(".listaPokemons");
 const botaoCarregarMais = document.querySelector("#carregarMais");
 const main = document.querySelector(".main");
-let detalhesPokemonDiv = null;
+let detalhesPokemonSection = null;
 
 let habilidades = "";
 
@@ -77,15 +77,15 @@ async function montarListaPokemons(offset, limit){
 
 async function puxarDetalhesPokemon(nomePokemon){
 
-    if(detalhesPokemonDiv!=null){
+    if(detalhesPokemonSection!=null){
 
-        detalhesPokemonDiv.parentNode.removeChild(detalhesPokemonDiv);
+        detalhesPokemonSection.parentNode.removeChild(detalhesPokemonSection);
 
     };
 
     function comandoDetalhesHTML(pokemon){return `
     
-    <section class="cardDetalhesPokemon ${pokemon.tipoPrincipal}">
+    <div class="cardDetalhesPokemon ${pokemon.tipoPrincipal}">
 
         <button class="setaVoltar">&larr;</button>
 
@@ -132,22 +132,22 @@ async function puxarDetalhesPokemon(nomePokemon){
 
         </div>
 
-    </section>
+    </div>
     
     `};
 
     const pokemonComDetalhes = await pokeAPI.buscarDetalhesPokemon(nomePokemon);
     
-    //Cria um novo elemento HTML para os detalhes do Pokémon e add a class
-    detalhesPokemonDiv = document.createElement("div");
-    detalhesPokemonDiv.classList.add("detalhesPokemonDiv");
+    //Cria um novo elemento HTML(section) para os detalhes do Pokémon e add a class
+    detalhesPokemonSection = document.createElement("section");
+    detalhesPokemonSection.classList.add("detalhesPokemonSection");
 
-    detalhesPokemonDiv.innerHTML = comandoDetalhesHTML(pokemonComDetalhes); //Adiciona o pokemon com detalhe dentro da div "detalhesPokemonDiv"
+    detalhesPokemonSection.innerHTML = comandoDetalhesHTML(pokemonComDetalhes); //Adiciona o pokemon com detalhe dentro da section "detalhesPokemonSection"
     
-    //Tempo entre a exclusão e a aprição da div
+    //Tempo entre a exclusão e a aprição da section
     setTimeout(() =>{
 
-        main.appendChild(detalhesPokemonDiv); //Adiciona a div "detalhesPokemonDiv" à página dentro da variável "main"
+        main.appendChild(detalhesPokemonSection); //Adiciona a section "detalhesPokemonSection" à página dentro da variável "main"
 
     }, 250);
 
@@ -158,8 +158,8 @@ async function puxarDetalhesPokemon(nomePokemon){
 
         setaVoltar.addEventListener("click", () => {
 
-            detalhesPokemonDiv.parentNode.removeChild(detalhesPokemonDiv);
-            detalhesPokemonDiv = null;
+            detalhesPokemonSection.parentNode.removeChild(detalhesPokemonSection);
+            detalhesPokemonSection = null;
     
         });
 
