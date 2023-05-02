@@ -1,3 +1,4 @@
+let content = document.querySelector(".content");
 const listaPokemons = document.querySelector(".listaPokemons");
 const botaoCarregarMais = document.querySelector("#carregarMais");
 const main = document.querySelector(".main");
@@ -76,6 +77,8 @@ async function montarListaPokemons(offset, limit){
 };
 
 async function puxarDetalhesPokemon(nomePokemon){
+
+    const tamanhoTela = window.innerWidth;
 
     if(detalhesPokemonSection!=null){
 
@@ -160,10 +163,22 @@ async function puxarDetalhesPokemon(nomePokemon){
 
             detalhesPokemonSection.parentNode.removeChild(detalhesPokemonSection);
             detalhesPokemonSection = null;
+
+            if(tamanhoTela<=992){
+
+                content.style.display = "block";
+
+            };
     
         });
 
     }, 500);
+
+    if(tamanhoTela<=992){
+
+        content.style.display = "none";
+
+    };
 
 };
 
